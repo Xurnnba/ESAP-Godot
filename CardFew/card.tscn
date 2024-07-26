@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5mpb8v4gf7ww"]
+
+[ext_resource type="Script" path="res://Scripts/card.gd" id="1_1df0g"]
+[ext_resource type="Texture2D" uid="uid://bawu4nl7or6fn" path="res://Sprites/Cards/DefaultCard.png" id="1_ojcg1"]
+[ext_resource type="Texture2D" uid="uid://be715eraobcbw" path="res://Sprites/Cards/TCard.png" id="2_wil32"]
+[ext_resource type="Texture2D" uid="uid://b26t44d30x7wf" path="res://Sprites/Cards/SetCard.png" id="4_nidia"]
+[ext_resource type="Texture2D" uid="uid://dn5cc2t2c2u3o" path="res://Sprites/Cards/BlankCard.png" id="5_1cdme"]
+[ext_resource type="Texture2D" uid="uid://c52fu4pl2247" path="res://Sprites/Cards/beans.png" id="5_alfki"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ds2s7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wil32")
+}],
+"loop": true,
+"name": &"TCard",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ojcg1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_nidia")
+}],
+"loop": true,
+"name": &"set",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_12pbx"]
+size = Vector2(160, 240)
+
+[node name="Card" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_1df0g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_ds2s7")
+animation = &"set"
+frame_progress = 0.541715
+
+[node name="BaseCollision" type="CollisionShape2D" parent="."]
+position = Vector2(2.08165e-12, 0)
+shape = SubResource("RectangleShape2D_12pbx")
+
+[node name="HoveredCollision" type="CollisionShape2D" parent="."]
+position = Vector2(2.08165e-12, 50)
+shape = SubResource("RectangleShape2D_12pbx")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.08165e-12, -40)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_alfki")
+
+[node name="CardFront" type="Sprite2D" parent="."]
+texture = ExtResource("5_1cdme")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

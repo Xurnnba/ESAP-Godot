@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=3 uid="uid://cvbx7l1sivio"]
+
+[ext_resource type="PackedScene" uid="uid://h3jdk1yw87q1" path="res://game.tscn" id="1_7sewv"]
+[ext_resource type="Script" path="res://Scripts/scene_manager.gd" id="1_yjyw3"]
+[ext_resource type="PackedScene" uid="uid://dv8vaj1cgff36" path="res://deck_build.tscn" id="2_iet7n"]
+[ext_resource type="PackedScene" uid="uid://6muebwrmu7rj" path="res://inventory.tscn" id="3_dlbse"]
+[ext_resource type="PackedScene" uid="uid://c0i4bq8hj8x80" path="res://card_db.tscn" id="3_qqjcj"]
+[ext_resource type="PackedScene" uid="uid://cq0puod8qi0gx" path="res://deck_db.tscn" id="4_4tflb"]
+[ext_resource type="Script" path="res://HTTPRequest.gd" id="6_g53t1"]
+[ext_resource type="PackedScene" uid="uid://d8cajxwa1sbt" path="res://main_menu.tscn" id="8_rlvkx"]
+
+[node name="SceneManager" type="Node" node_paths=PackedStringArray("initialScene")]
+script = ExtResource("1_yjyw3")
+initialScene = NodePath("MainMenu")
+
+[node name="Inventory" parent="." instance=ExtResource("3_dlbse")]
+
+[node name="DeckDB" parent="." instance=ExtResource("4_4tflb")]
+
+[node name="CardDB" parent="." instance=ExtResource("3_qqjcj")]
+
+[node name="Game" parent="." instance=ExtResource("1_7sewv")]
+visible = false
+
+[node name="DeckBuild" parent="." instance=ExtResource("2_iet7n")]
+process_mode = 1
+visible = false
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+script = ExtResource("6_g53t1")
+
+[node name="Sprite2D" type="Sprite2D" parent="HTTPRequest"]
+position = Vector2(100, 100)
+
+[node name="MainMenu" parent="." instance=ExtResource("8_rlvkx")]
+visible = false

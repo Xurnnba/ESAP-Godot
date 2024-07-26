@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3 uid="uid://dv8vaj1cgff36"]
+
+[ext_resource type="Script" path="res://Scripts/deck_build.gd" id="1_d0i2p"]
+[ext_resource type="PackedScene" uid="uid://ctj22tmge0ljd" path="res://deck_ui.tscn" id="2_ekgwb"]
+[ext_resource type="Script" path="res://Scripts/CardInfo.gd" id="3_1sig1"]
+[ext_resource type="Script" path="res://VBoxContainer.gd" id="4_hp3em"]
+
+[node name="DeckBuild" type="Node2D"]
+script = ExtResource("1_d0i2p")
+
+[node name="DeckUI" parent="." instance=ExtResource("2_ekgwb")]
+
+[node name="CardInfo" type="TextEdit" parent="."]
+offset_left = 3.0
+offset_top = 467.0
+offset_right = 272.0
+offset_bottom = 640.0
+text = "Card Name:
+HP:
+ATK:
+Tribute Cost:
+Energy Cost:
+Attributes:"
+editable = false
+script = ExtResource("3_1sig1")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(50, 50)
+offset_left = 768.0
+offset_top = 40.0
+offset_right = 1152.0
+offset_bottom = 651.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("4_hp3em")
+
+[node name="InventoryLabel" type="TextEdit" parent="."]
+layout_direction = 2
+offset_left = 1057.0
+offset_top = -2.0
+offset_right = 1150.0
+offset_bottom = 34.0
+text = "Inventory"
+editable = false
+
+[node name="DeckLabel" type="TextEdit" parent="."]
+layout_direction = 2
+offset_left = 1.0
+offset_right = 57.0
+offset_bottom = 36.0
+text = "Deck"
+editable = false
+
+[node name="ExitButton" type="Button" parent="."]
+offset_left = 272.0
+offset_top = 608.0
+offset_right = 423.0
+offset_bottom = 639.0
+text = "Exit"
+
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3qynifvopabj"]
+
+[ext_resource type="Script" path="res://Scripts/EnemyHand.gd" id="1_jvs3d"]
+[ext_resource type="PackedScene" uid="uid://c5mpb8v4gf7ww" path="res://card.tscn" id="2_yvhom"]
+
+[node name="EnemyHand" type="Node2D"]
+script = ExtResource("1_jvs3d")
+card = ExtResource("2_yvhom")

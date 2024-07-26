@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://da7dogbxo1406"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_field_slot.gd" id="1_ovpdl"]
+[ext_resource type="Texture2D" uid="uid://b2amwnddeyrwu" path="res://Sprites/CardSlot.png" id="1_tk3xm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1f6mb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tk3xm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_34pl0"]
+size = Vector2(180, 260)
+
+[node name="EnemyFieldSlot" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_ovpdl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1f6mb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_34pl0")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

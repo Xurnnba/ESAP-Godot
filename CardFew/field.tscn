@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfmvg2p8mfgwx"]
+
+[ext_resource type="Script" path="res://Scripts/field.gd" id="1_1q6sm"]
+[ext_resource type="Texture2D" uid="uid://b2amwnddeyrwu" path="res://Sprites/CardSlot.png" id="1_qjykr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_swrfu"]
+size = Vector2(180, 260)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2nkv3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qjykr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="FieldSlot" type="Area2D"]
+z_index = -1
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_1q6sm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_swrfu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2nkv3")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

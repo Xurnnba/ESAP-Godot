@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctj22tmge0ljd"]
+
+[ext_resource type="Script" path="res://Scripts/DeckUI.gd" id="1_bao85"]
+[ext_resource type="PackedScene" uid="uid://b7vbgscfkv6hn" path="res://ui_card.tscn" id="2_xw6ku"]
+
+[node name="DeckUI" type="Node2D"]
+script = ExtResource("1_bao85")
+cardUI = ExtResource("2_xw6ku")

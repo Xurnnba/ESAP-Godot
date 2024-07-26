@@ -1,0 +1,274 @@
+[gd_scene load_steps=20 format=3 uid="uid://h3jdk1yw87q1"]
+
+[ext_resource type="Script" path="res://game.gd" id="1_5w6sg"]
+[ext_resource type="PackedScene" uid="uid://ds6htfqediw5o" path="res://deck.tscn" id="1_fcme5"]
+[ext_resource type="PackedScene" uid="uid://6eemg1j1fmic" path="res://hand.tscn" id="2_wemem"]
+[ext_resource type="PackedScene" uid="uid://b71madwpqpuxg" path="res://discard.tscn" id="3_h6mac"]
+[ext_resource type="PackedScene" uid="uid://bwys0ufvblbjw" path="res://game_state_machine.tscn" id="4_hbtxa"]
+[ext_resource type="PackedScene" uid="uid://dfmvg2p8mfgwx" path="res://field.tscn" id="5_sfqak"]
+[ext_resource type="PackedScene" uid="uid://da7dogbxo1406" path="res://enemy_field_slot.tscn" id="7_mfhdm"]
+[ext_resource type="PackedScene" uid="uid://c3qynifvopabj" path="res://enemy_hand.tscn" id="8_3xyeu"]
+[ext_resource type="PackedScene" uid="uid://bo8rul7psaayg" path="res://enemy_deck.tscn" id="9_sdark"]
+[ext_resource type="Script" path="res://Scripts/CardInfo.gd" id="10_r6rqc"]
+[ext_resource type="Script" path="res://Health.gd" id="11_s2mwn"]
+[ext_resource type="Texture2D" uid="uid://cpi2dwhtnrh8d" path="res://Sprites/MenuIcons.png" id="12_3cd82"]
+[ext_resource type="Script" path="res://Phase.gd" id="13_ca3tm"]
+[ext_resource type="Texture2D" uid="uid://db5y265oyyq8w" path="res://Sprites/GameField.png" id="14_76chr"]
+[ext_resource type="Script" path="res://Scripts/GameEnd.gd" id="15_l27hf"]
+[ext_resource type="Texture2D" uid="uid://cl71tlus5c5il" path="res://Sprites/blackSquare.png" id="15_v0sp2"]
+[ext_resource type="PackedScene" uid="uid://b7vbgscfkv6hn" path="res://ui_card.tscn" id="16_rw3mj"]
+[ext_resource type="Texture2D" uid="uid://ihkcqecxs6dn" path="res://Sprites/taverntable.png" id="18_gb246"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5cec5"]
+atlas = ExtResource("12_3cd82")
+region = Rect2(81, -2.5, 79, 82)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_5w6sg")
+
+[node name="EnemyDeck" parent="." instance=ExtResource("9_sdark")]
+
+[node name="PlayerDeck" parent="." instance=ExtResource("1_fcme5")]
+
+[node name="EnemyHand" parent="." node_paths=PackedStringArray("EnemySlot1", "EnemySlot2", "EnemySlot3", "EnemySlot4", "EnemySlot5") instance=ExtResource("8_3xyeu")]
+EnemySlot1 = NodePath("../EnemyFieldSlot1")
+EnemySlot2 = NodePath("../EnemyFieldSlot2")
+EnemySlot3 = NodePath("../EnemyFieldSlot3")
+EnemySlot4 = NodePath("../EnemyFieldSlot4")
+EnemySlot5 = NodePath("../EnemyFieldSlot5")
+
+[node name="PlayerHand" parent="." node_paths=PackedStringArray("PlayerSlot1", "PlayerSlot2", "PlayerSlot3", "PlayerSlot4", "PlayerSlot5") instance=ExtResource("2_wemem")]
+PlayerSlot1 = NodePath("../FieldSlot1")
+PlayerSlot2 = NodePath("../FieldSlot2")
+PlayerSlot3 = NodePath("../FieldSlot3")
+PlayerSlot4 = NodePath("../FieldSlot4")
+PlayerSlot5 = NodePath("../FieldSlot5")
+
+[node name="EnemyDiscard" parent="." instance=ExtResource("3_h6mac")]
+
+[node name="PlayerDiscard" parent="." instance=ExtResource("3_h6mac")]
+
+[node name="GameStateMachine" parent="." instance=ExtResource("4_hbtxa")]
+
+[node name="BattlePhase" parent="GameStateMachine" index="1" node_paths=PackedStringArray("EnemySlot1", "EnemySlot2", "EnemySlot3", "EnemySlot4", "EnemySlot5", "PlayerSlot1", "PlayerSlot2", "PlayerSlot3", "PlayerSlot4", "PlayerSlot5")]
+EnemySlot1 = NodePath("../../EnemyFieldSlot1")
+EnemySlot2 = NodePath("../../EnemyFieldSlot2")
+EnemySlot3 = NodePath("../../EnemyFieldSlot3")
+EnemySlot4 = NodePath("../../EnemyFieldSlot4")
+EnemySlot5 = NodePath("../../EnemyFieldSlot5")
+PlayerSlot1 = NodePath("../../FieldSlot1")
+PlayerSlot2 = NodePath("../../FieldSlot2")
+PlayerSlot3 = NodePath("../../FieldSlot3")
+PlayerSlot4 = NodePath("../../FieldSlot4")
+PlayerSlot5 = NodePath("../../FieldSlot5")
+
+[node name="ActionPhase" parent="GameStateMachine" index="3" node_paths=PackedStringArray("EnemySlot1", "EnemySlot2", "EnemySlot3", "EnemySlot4", "EnemySlot5", "PlayerSlot1", "PlayerSlot2", "PlayerSlot3", "PlayerSlot4", "PlayerSlot5")]
+EnemySlot1 = NodePath("../../EnemyFieldSlot1")
+EnemySlot2 = NodePath("../../EnemyFieldSlot2")
+EnemySlot3 = NodePath("../../EnemyFieldSlot3")
+EnemySlot4 = NodePath("../../EnemyFieldSlot4")
+EnemySlot5 = NodePath("../../EnemyFieldSlot5")
+PlayerSlot1 = NodePath("../../FieldSlot1")
+PlayerSlot2 = NodePath("../../FieldSlot2")
+PlayerSlot3 = NodePath("../../FieldSlot3")
+PlayerSlot4 = NodePath("../../FieldSlot4")
+PlayerSlot5 = NodePath("../../FieldSlot5")
+
+[node name="EndPhase" parent="GameStateMachine" index="4" node_paths=PackedStringArray("EnemySlot1", "EnemySlot2", "EnemySlot3", "EnemySlot4", "EnemySlot5", "PlayerSlot1", "PlayerSlot2", "PlayerSlot3", "PlayerSlot4", "PlayerSlot5")]
+EnemySlot1 = NodePath("../../EnemyFieldSlot1")
+EnemySlot2 = NodePath("../../EnemyFieldSlot2")
+EnemySlot3 = NodePath("../../EnemyFieldSlot3")
+EnemySlot4 = NodePath("../../EnemyFieldSlot4")
+EnemySlot5 = NodePath("../../EnemyFieldSlot5")
+PlayerSlot1 = NodePath("../../FieldSlot1")
+PlayerSlot2 = NodePath("../../FieldSlot2")
+PlayerSlot3 = NodePath("../../FieldSlot3")
+PlayerSlot4 = NodePath("../../FieldSlot4")
+PlayerSlot5 = NodePath("../../FieldSlot5")
+
+[node name="FieldSlot1" parent="." instance=ExtResource("5_sfqak")]
+position = Vector2(236, 409)
+fieldNum = 1
+
+[node name="FieldSlot2" parent="." instance=ExtResource("5_sfqak")]
+position = Vector2(406, 409)
+fieldNum = 2
+
+[node name="FieldSlot3" parent="." instance=ExtResource("5_sfqak")]
+position = Vector2(576, 409)
+fieldNum = 3
+
+[node name="FieldSlot4" parent="." instance=ExtResource("5_sfqak")]
+position = Vector2(746, 409)
+fieldNum = 4
+
+[node name="FieldSlot5" parent="." instance=ExtResource("5_sfqak")]
+position = Vector2(916, 409)
+fieldNum = 5
+
+[node name="EnemyFieldSlot1" parent="." instance=ExtResource("7_mfhdm")]
+z_index = -1
+position = Vector2(236, 249)
+fieldNum = 1
+
+[node name="EnemyFieldSlot2" parent="." instance=ExtResource("7_mfhdm")]
+z_index = -1
+position = Vector2(406, 249)
+fieldNum = 2
+
+[node name="EnemyFieldSlot3" parent="." instance=ExtResource("7_mfhdm")]
+z_index = -1
+position = Vector2(576, 249)
+fieldNum = 3
+
+[node name="EnemyFieldSlot4" parent="." instance=ExtResource("7_mfhdm")]
+z_index = -1
+position = Vector2(746, 249)
+fieldNum = 4
+
+[node name="EnemyFieldSlot5" parent="." instance=ExtResource("7_mfhdm")]
+z_index = -1
+position = Vector2(916, 249)
+fieldNum = 5
+
+[node name="CardInfo" type="TextEdit" parent="."]
+offset_right = 333.0
+offset_bottom = 175.0
+text = "Card Name:
+HP:
+ATK:
+Tribute Cost:
+Energy Cost:
+Attributes:"
+editable = false
+script = ExtResource("10_r6rqc")
+
+[node name="Health" type="TextEdit" parent="."]
+offset_left = 963.0
+offset_top = 2.0
+offset_right = 1151.0
+offset_bottom = 94.0
+text = "Your HP: 5
+Enemy HP: 5"
+editable = false
+script = ExtResource("11_s2mwn")
+
+[node name="Continue" type="Button" parent="."]
+offset_left = 35.0
+offset_top = 279.0
+offset_right = 124.0
+offset_bottom = 369.0
+icon = SubResource("AtlasTexture_5cec5")
+
+[node name="Phase" type="TextEdit" parent="."]
+offset_left = 3.0
+offset_top = 379.0
+offset_right = 186.0
+offset_bottom = 443.0
+text = "Current Phase:
+Energy Left:"
+editable = false
+script = ExtResource("13_ca3tm")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576, 324)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("14_76chr")
+
+[node name="GameEnd" type="Control" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+z_index = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 646.0
+script = ExtResource("15_l27hf")
+card = ExtResource("16_rw3mj")
+
+[node name="Label" type="Label" parent="GameEnd"]
+layout_mode = 0
+offset_left = 358.0
+offset_top = 71.0
+offset_right = 934.0
+offset_bottom = 211.0
+theme_override_font_sizes/font_size = 100
+text = "You Lost...
+"
+
+[node name="Next" type="Button" parent="GameEnd"]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 294.0
+offset_right = 659.0
+offset_bottom = 351.0
+text = "Retry"
+
+[node name="Exit" type="Button" parent="GameEnd"]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 361.0
+offset_right = 659.0
+offset_bottom = 418.0
+text = "Exit
+"
+
+[node name="Sprite2D" type="Sprite2D" parent="GameEnd"]
+z_index = -1
+position = Vector2(576, 325)
+scale = Vector2(7.165, 4.285)
+texture = ExtResource("15_v0sp2")
+
+[node name="Card1" type="Button" parent="GameEnd"]
+layout_mode = 0
+offset_left = 329.0
+offset_top = 473.0
+offset_right = 480.0
+offset_bottom = 557.0
+
+[node name="Card2" type="Button" parent="GameEnd"]
+layout_mode = 0
+offset_left = 499.0
+offset_top = 473.0
+offset_right = 650.0
+offset_bottom = 557.0
+
+[node name="Card3" type="Button" parent="GameEnd"]
+layout_mode = 0
+offset_left = 669.0
+offset_top = 473.0
+offset_right = 820.0
+offset_bottom = 557.0
+
+[node name="MessageBox" type="TextEdit" parent="."]
+offset_left = 980.0
+offset_top = 205.0
+offset_right = 1150.0
+offset_bottom = 390.0
+editable = false
+wrap_mode = 1
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(576, 283)
+texture = ExtResource("18_gb246")
+
+[connection signal="slotChosen" from="FieldSlot1" to="GameStateMachine" method="_on_field_slot_chosen"]
+[connection signal="slotChosen" from="FieldSlot2" to="GameStateMachine" method="_on_field_slot_chosen"]
+[connection signal="slotChosen" from="FieldSlot3" to="GameStateMachine" method="_on_field_slot_chosen"]
+[connection signal="slotChosen" from="FieldSlot4" to="GameStateMachine" method="_on_field_slot_chosen"]
+[connection signal="slotChosen" from="FieldSlot5" to="GameStateMachine" method="_on_field_slot_chosen"]
+[connection signal="pressed" from="Continue" to="GameStateMachine" method="_on_continue_pressed"]
+[connection signal="pressed" from="GameEnd/Next" to="GameEnd" method="_on_next_pressed"]
+[connection signal="pressed" from="GameEnd/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="GameEnd/Card1" to="GameEnd" method="_on_card_1_pressed"]
+[connection signal="pressed" from="GameEnd/Card2" to="GameEnd" method="_on_card_2_pressed"]
+[connection signal="pressed" from="GameEnd/Card3" to="GameEnd" method="_on_card_3_pressed"]
+
+[editable path="GameStateMachine"]

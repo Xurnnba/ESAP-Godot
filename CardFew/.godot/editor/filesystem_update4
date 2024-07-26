@@ -1,0 +1,16 @@
+res://card.tscn
+res://Scripts/GameStateMachine.gd
+res://Scripts/scene_manager.gd
+res://Game States/BattlePhase.gd
+res://ui_card.tscn
+res://deck_build.tscn
+res://deck_db.tscn
+res://deck_ui.tscn
+res://card_db.tscn
+res://scene_manager.tscn
+res://game.tscn
+res://hand.tscn
+res://enemy_deck.tscn
+res://main_menu.tscn
+res://game_state_machine.tscn
+res://Scripts/GDScriptAudioImport.gd

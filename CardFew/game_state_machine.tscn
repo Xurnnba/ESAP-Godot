@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://bwys0ufvblbjw"]
+
+[ext_resource type="Script" path="res://Scripts/GameStateMachine.gd" id="1_s82ua"]
+[ext_resource type="Script" path="res://Scripts/GameState.gd" id="2_3fjio"]
+[ext_resource type="Script" path="res://Game States/BattlePhase.gd" id="3_2dvg5"]
+[ext_resource type="Script" path="res://Game States/DrawPhase.gd" id="4_ttsjf"]
+[ext_resource type="Script" path="res://Game States/ActionPhase.gd" id="5_b48g1"]
+[ext_resource type="Script" path="res://Scripts/EndPhase.gd" id="6_n0gvy"]
+
+[node name="GameStateMachine" type="Node" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_s82ua")
+initial_state = NodePath("DrawPhase")
+
+[node name="GameState" type="Node" parent="."]
+script = ExtResource("2_3fjio")
+
+[node name="BattlePhase" type="Node" parent="."]
+script = ExtResource("3_2dvg5")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BattlePhase"]
+
+[node name="DrawPhase" type="Node" parent="."]
+script = ExtResource("4_ttsjf")
+
+[node name="ActionPhase" type="Node" parent="."]
+script = ExtResource("5_b48g1")
+
+[node name="EndPhase" type="Node" parent="."]
+script = ExtResource("6_n0gvy")
+
+[connection signal="cardSelected" from="." to="." method="_on_card_selected"]

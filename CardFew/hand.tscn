@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://6eemg1j1fmic"]
+
+[ext_resource type="Script" path="res://Scripts/Hand.gd" id="1_igmpf"]
+[ext_resource type="PackedScene" uid="uid://c5mpb8v4gf7ww" path="res://card.tscn" id="2_e1x65"]
+
+[node name="Hand" type="Node2D"]
+z_index = 5
+script = ExtResource("1_igmpf")
+card = ExtResource("2_e1x65")
