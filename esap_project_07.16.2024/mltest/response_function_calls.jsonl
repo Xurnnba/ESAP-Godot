@@ -1,0 +1,71 @@
+{
+    "messages": [
+        {
+            "role": "user",
+            "content": "I want a powerful card"
+        },
+        {
+            "role": "assistant",
+            "tool_calls": [
+                {
+                    "id": "call_id",
+                    "type": "function",
+                    "function": {
+                        "name": "card",
+                        "arguments": "{\"name\": \"Shadow Titan\", \"health\": \"300\", \"ATK\": \"100\", \"attribute\": \"Demon\", \"tribute_cost\": \"5\", \"energy_cost\": \"10\",}"
+                    }
+                }
+            ]
+        },
+        {
+            "role": "tool",
+            "tool_call_id": "call_id",
+            "content": "{\"content\": \" \"name\":  \"Shadow Titan\", \"health\": 300, \"ATK\": 100, \"attribute\": \"Demon\", \"tribute_cost\": 5, \"energy_cost\": 10 \"}"
+        }
+    ],
+    "tools": [
+    {
+        "type": "function",
+        "function": {
+            "name": "card",
+            "description": "generate a card with used parameters",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the card",
+                    },
+                    "health": {
+                        "type": "number",
+                        "description": "health value of the card",
+                    },
+                    "ATK": {
+                        "type": "number",
+                        "description": "attack value of the card",
+                    },
+                    "attribute": {
+                        "type": "string",
+                        "description": "the card's special attribute that affects the game",
+                    },
+                    "tribute_cost": {
+                        "type": "number",
+                        "description": "number of sacrifice of weaker cards to summon this powerful card ",
+                    },
+                    "energy_cost": {
+                        "type": "number",
+                        "description": "the number of energy needed for this card",
+                    },
+                },
+                "required": [
+                    "name",
+                    "health",
+                    "ATK",
+                    "attribute",
+                    "energy_cost"
+                ]
+            }
+        }
+    }
+]
+}

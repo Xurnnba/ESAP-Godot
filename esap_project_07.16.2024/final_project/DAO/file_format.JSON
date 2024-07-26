@@ -1,0 +1,9 @@
+{
+  "name" : "sample",
+  "health" : 10,
+  "ATK" : 5,
+  "attribute" : "sample",
+  "tribute cost" : 3,
+  "energy cost" : 2
+}
+

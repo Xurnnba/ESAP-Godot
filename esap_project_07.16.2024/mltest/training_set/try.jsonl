@@ -1,0 +1,64 @@
+{
+    "messages": [
+        { "role": "user", "content": "The game just started, generate one card for player" },
+        {
+            "role": "assistant",
+            "tool_calls": [
+                {
+                    "id": "call_id",
+                    "type": "function",
+                    "function": {
+                        "name": "card",
+                        "arguments": {
+                            "name": "shadow fiend",
+                            "health": 5,
+                            "ATK": 3,
+                            "attribute": "Revival",
+                            "tribute_cost": 0,
+                            "energy_cost": 3
+                        }
+                    }
+                }
+            ]
+        }
+      ],
+    "tools": [
+        {
+            "type": "function",
+            "function": {
+                "name": "card",
+                "description": "Generate a card with specified parameters",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "Name of the card"
+                        },
+                        "health": {
+                            "type": "number",
+                            "description": "Health value of the card"
+                        },
+                        "ATK": {
+                            "type": "number",
+                            "description": "Attack value of the card"
+                        },
+                        "attribute": {
+                            "type": "string",
+                            "description": "The card's special attribute that affects the game"
+                        },
+                        "tribute_cost": {
+                            "type": "number",
+                            "description": "Number of weaker cards to sacrifice to summon this powerful card"
+                        },
+                        "energy_cost": {
+                            "type": "number",
+                            "description": "The amount of energy needed for this card"
+                        }
+                    },
+                    "required": ["name", "health", "ATK", "attribute", "energy_cost"]
+                }
+            }
+        }
+    ]
+}
